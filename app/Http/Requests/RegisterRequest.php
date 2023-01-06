@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 
 class RegisterRequest extends FormRequest
@@ -26,8 +28,8 @@ class RegisterRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email'],
-            'user_name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', Rule::unique(User::class, 'email')],
+            'user_name' => ['required', 'string', 'max:255', Rule::unique(User::class, 'user_name')],
             'phone_number' => ['required', 'string', 'regex:/(01)[0-9]{9}/'],
             'date_of_birth' => ['required', 'date', 'before:today'],
             'password' => ['required', 'confirmed', Password::defaults()],
