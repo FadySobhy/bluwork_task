@@ -4,11 +4,15 @@ namespace App\Providers;
 
 use App\Actions\Auth\UserAuthAction;
 use App\Actions\Contracts\Auth\UserAuth;
+use App\Actions\Contracts\Orders\StoreOrder;
+use App\Actions\Contracts\Orders\StoreOrderItem;
 use App\Actions\Contracts\Users\DeleteUser;
 use App\Actions\Contracts\Users\FindUserByUserName;
 use App\Actions\Contracts\Users\GetPaginatedUsers;
 use App\Actions\Contracts\Users\StoreUser;
 use App\Actions\Contracts\Users\UpdateUser;
+use App\Actions\Orders\StoreOrderAction;
+use App\Actions\Orders\StoreOrderItemAction;
 use App\Actions\Users\DeleteUserAction;
 use App\Actions\Users\FindUserByUserNameAction;
 use App\Actions\Users\GetPaginatedUsersAction;
@@ -44,5 +48,9 @@ class ActionServiceProvider extends ServiceProvider
         $this->app->bind(DeleteUser::class, DeleteUserAction::class);
         $this->app->bind(GetPaginatedUsers::class, GetPaginatedUsersAction::class);
         $this->app->bind(FindUserByUserName::class, FindUserByUserNameAction::class);
+
+        //Orders
+        $this->app->bind(StoreOrder::class, StoreOrderAction::class);
+        $this->app->bind(StoreOrderItem::class, StoreOrderItemAction::class);
     }
 }
