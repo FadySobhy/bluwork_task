@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\V1\Auth\AuthController;
+use App\Http\Controllers\Api\V1\Orders\MakeOrder;
 use App\Http\Controllers\Api\V1\ProblemSolving\ProblemSolvingController;
 use App\Http\Controllers\Api\V1\Users\UserController;
 use Illuminate\Http\Request;
@@ -28,5 +29,7 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
 
     Route::middleware('auth:sanctum')->group( function () {
         Route::apiResource('users', UserController::class)->except(['store']);
+
+        Route::post('make-order', MakeOrder::class)->name('make-order');
     });
 });
